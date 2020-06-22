@@ -35,14 +35,16 @@ Additionally the project will include:
 - Primary Data - USDA National Farmers Market Directory API
 - Supplemental Data - Scraper API (bonus)
 - Design inspiration - IBM Carbon
-- React for updating the sidebar when map is altered
+- React for map, searchbar, and sidebar so they can share a state and update uniformly
   
 *Structure:*  
-- index.html will include most of our app, search bar is just an html form, search bar drop down results is just a hidden div, then we have our map which is an iframe embed, our sidebar menu which is an unordered list, and the static footer.
-- index.js entry file to begin compilation
-- map.js google maps api logic, which uses jquery dom manipulation to populate the map and map sidebar. When document loads, it uses request.findGeo from request.js to check the users geolocation, sets it to local storage & updates the page using jquery DOM manipulation, then centers the map to that location. It then uses request.getNearbyLocations that queries the database APIs, populates the map with pins and sidebar menu with a list of locations.
-- searchbar.js google maps places api logic, imports request.js and makes api calls, then stores results in localStorage and uses jquery to update the map element.
-- request.js includes API calls to fetch data and returns promise using ajax jquery.
+- index.html will include our static assets and a root div for react map/searchbar component
+- index.js entry file
+- map.js google maps react component that replaces 
+- searchbar.js searchbar input field component
+- searchbar-dropdown.js the dropdown menu component
+- sidebar.js the sidebar which displays the search results and if you click on a result, a detailed view of that item
+- request.js includes API calls to fetch data and returns promise
 
 #
 
