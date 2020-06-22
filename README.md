@@ -35,7 +35,7 @@ Additionally the project will include:
 - Primary Data - USDA National Farmers Market Directory API
 - Supplemental Data - Scraper API (bonus)
 - Design inspiration - IBM Carbon
-- jQuery
+- React for updating the sidebar when map is altered
   
 *Structure:*  
 - index.html will include most of our app, search bar is just an html form, search bar drop down results is just a hidden div, then we have our map which is an iframe embed, our sidebar menu which is an unordered list, and the static footer.
