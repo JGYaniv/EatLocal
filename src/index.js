@@ -1,5 +1,5 @@
-import { initMap, initAutocomplete } from "./map.js";
-import keys from '../config/keys'
+import { initMap } from "./map.js";
+import keys from '../config/keys.js';
 
 if (!window.google) {
   let script = document.createElement("script");
@@ -13,5 +13,5 @@ if (!window.google) {
 }
 
 document.addEventListener("DOMContentLoaded", ()=>{
-  setTimeout(initAutocomplete, 500);
+  setTimeout(initMap, 500);
 })

@@ -1,29 +1,19 @@
 #map {
   height: 100%;
+  border-left: 1px solid black;
 }
-/* Optional: Makes the sample page fill the window. */
+
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: rgb(246, 246, 246);
 }
 
 #description {
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
-}
-
-#infowindow-content .title {
-  font-weight: bold;
-}
-
-#infowindow-content {
-  display: none;
-}
-
-#map #infowindow-content {
-  display: inline;
 }
 
 .pac-card {
@@ -42,11 +32,6 @@ html, body {
   margin-right: 12px;
 }
 
-.pac-controls {
-  display: inline-block;
-  padding: 5px 11px;
-}
-
 .pac-controls label {
   font-family: Roboto;
   font-size: 13px;
@@ -58,31 +43,120 @@ html, body {
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
   text-overflow: ellipsis;
-  width: 400px;
+  width: 380px;
+  box-sizing: border-box;
+  height: 35px;
+  z-index: 1;
+  margin:10px;
+  position: absolute;
 }
 
 #pac-input:focus {
   border-color: #4d90fe;
 }
 
-#title {
-  color: #fff;
-  background-color: #4d90fe;
-  font-size: 25px;
-  font-weight: 500;
-  padding: 6px 12px;
-}
-
 #capture {
-    height: 100%;
-    width: 25%;
-    min-width:300px;
+    height: calc(100% - 180px);
+    box-sizing: border-box;
+    width: 400px;
     overflow: hidden;
     float: left;
-    background-color: #ECECFB;
-    border: thin solid #333;
-    border-left: none;
+    background-color: rgb(246, 246, 246);
+    margin-top: 60px;
+    margin-bottom: 180px;
+    overflow-y: auto;
+}
+
+.map-detail-item{
+  display: flex;
+  flex-flow: column;
+  padding: 20px;
+  min-height:60px;
+  font-family: Arial, Helvetica, sans-serif;
+  border-bottom: 1px solid lightgray;
+  background-color: "";
+}
+.map-detail-item:hover{
+  background-color: lightblue;
+  cursor: pointer;
+}
+.map-detail-item .title{
+  font-weight: 600;
+}
+
+#pac-nav{
+  border-top: 1px lightgray solid;
+  height: 120px;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: 400px;
+}
+
+#location-details{
+    position: absolute;
+    background: rgb(246, 246, 246);
+    width: 400px;
+    height: calc(100% - 1px);
+    display: none;
+    margin-top: -60px;
+    box-sizing: border-box;
+    border-right: 1px solid #333;
+
+}
+
+#location-details button{
+  position: absolute;
+  z-index: 1;
+  right: 20px;
+  top: 340px;
+  background-color: #ffffff87;
+  border: 1px solid gray;
+  border-radius: 30%;
+  height: 40px;
+  width: 40px;
+}
+
+#location-details button:hover{
+  background-color: #add8e691;
+  cursor: pointer;
+}
+
+.details-header {
+  padding: 20px;
+}
+
+.details-header h1{
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+}
+
+.details-list {
+  display: flex;
+  flex-flow: column;
+  align-items: left;
+  padding: 20px;
+}
+
+.details-list div{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.details-list img{
+  height: 35px;
+  width: 25px;
+  margin-right: 10px;
+}
+
+.details-list p{
+  margin: 0;
+}
+
+div.pac-container.pac-logo.hdpi::after{
+  display: none;
 }
