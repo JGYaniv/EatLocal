@@ -12,5 +12,9 @@ if (!window.google) {
 }
 
 document.addEventListener("DOMContentLoaded", ()=>{
-  setTimeout(initMap, 500);
+    if (!window.google) {
+      setTimeout(initMap, 1000);
+    } else {
+      initMap();
+    };
 })
