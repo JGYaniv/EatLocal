@@ -1,25 +1,29 @@
 import mapStyle from './map_style.js'
 import { animateMapZoomTo } from "./utils/map_utils";
-import {
-  createMarker,
-  removeMarker,
-  createInfoWindow,
-  createPosMarker,
-} from "./map_markers";
-import updateNav from "./web_components/map_results_nav"
+import { createMarker, createInfoWindow, createPosMarker } from "./map_markers";
 import addDetail from "./web_components/map_result_item"
+import addResultsNav from "./web_components/map_results_nav"
 import * as apiUtil from "./utils/api_utils"
 
 export const initMap = () => {
-  //if google maps bootstrap has not finished loading, wait a second
+  //if google maps has not loaded, wait a second, then another, then another
   if (!window.google) setTimeout(console.log("loading..."), 1000);
-  
+  if (!window.google) setTimeout(console.log("loading..."), 1000);
+  if (!window.google) setTimeout(console.log("loading..."), 1000);
 
-  // instance variables
-  var markers = {};
-  var posMarker = null;
-  var pageNum = 0;
-  var pageSize = 10;
+  // set marker state
+  window.markers = {};
+  window.posMarker = null;
+
+  // set nav state
+  let initNavState = { 
+    pageNum: 1, 
+    pageSize: 10,
+    resultNum: 0, 
+  };
+  window.localStorage.setItem("navState", JSON.stringify(initNavState));
+
+  // config google map API
   var input = document.getElementById("pac-input");
   var searchBox = new window.google.maps.places.SearchBox(input);
   var map = new window.google.maps.Map(document.getElementById("map"), {
@@ -30,7 +34,6 @@ export const initMap = () => {
     disableDefaultUI: true,
   });
   
-
   // move starting pos to users's geolocation
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
@@ -47,24 +50,33 @@ export const initMap = () => {
   const removeMarker = (marker) => {
     marker.setMap(null)
     document.getElementById(marker.id).remove()
-    delete markers[marker.id]
+
+    // update markers state
+    delete window.markers[marker.id]
   }
 
   // event listener that triggers functions which populate map
   map.addListener("bounds_changed", function () {
-    let bounds = map.getBounds();
-    searchBox.setBounds(bounds);
+    let bounds = map.getBounds(); // get current map bounds
+    searchBox.setBounds(bounds); // set searchbox bias
 
     // get locations and convert into a pojo based on page size and number
     let locations = bounds ? apiUtil.getNearbyLocations(bounds) : [];
+    window.localStorage.setItem("resultNum", locations.length)
     let pageLocations = {}
-    let locationIndex = (pageNum * 10)
-    for (let i = locationIndex; i < pageSize + locationIndex; i++){
-      pageLocations[locations[i].FMID] = locations[i]
-    }   
+
+    // calculates number of results & the index of locations array to slice
+    let {pageNum, pageSize} = JSON.parse(window.localStorage.getItem("navState"))
+    let endIdx = pageNum * pageSize;
+    let startIdx = (pageNum - 1) * pageSize
+
+    // create an object from the selected 
+    for (let i = startIdx; i < endIdx; i++) {
+      pageLocations[locations[i].FMID] = locations[i];
+    }
 
     // remove markers that are not included in the location list
-    let markersArr = Object.values(markers)
+    let markersArr = Object.values(window.markers)
     for (let i = 0; i < pageSize; i++) {
       let marker = markersArr[i];
       if (marker){
@@ -72,25 +84,25 @@ export const initMap = () => {
       } 
     }
 
-    // create new markers if they do not already exist
+    // creates new markers if a given location does not already exist in the markers object
     let pageLocationsArr = Object.values(pageLocations)
     for (let i=0; i<pageSize; i++){
       let newLocation = pageLocationsArr[i]
       let locationId = newLocation["FMID"];
 
-      if (!markers[locationId]) {
+      if (!window.markers[locationId]) {
         let infoWindow = createInfoWindow(newLocation)
         let newMarker = createMarker(map, newLocation, infoWindow);
         addDetail(newLocation, newMarker, infoWindow);
-  
-        markers[newMarker.id] = newMarker;
+        addResultsNav();
+        window.markers[newMarker.id] = newMarker;
       }
     }
 
-    // console logs in case markers and details are not deleting properly
-    if (markers.length > pageSize) console.log('you got too many markers bro, whatsup?')
+    // for testing: console logs in case markers and details are not deleting properly
+    if (markers.length > pageSize) console.log('you got too many markers hombre, whatsup?')
     if (document.getElementsByClassName("map-detail-item").length > pageSize){
-      console.log('you got too details bro, whatsup?')
+      console.log('you got too details chico, whatsup?')
     }
   });
   
@@ -98,6 +110,7 @@ export const initMap = () => {
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
   searchBox.addListener("places_changed", () => {
+      // select first PAC result
       var place = searchBox.getPlaces()[0];
       if (!place) return;
       if (!place.geometry) return;
@@ -106,19 +119,21 @@ export const initMap = () => {
       document.getElementById("pac-input").value = place.formatted_address;
 
       // create new posMarker and update our posMarker "state"
-      if (posMarker) posMarker.setMap(null);
+      if (window.posMarker) window.posMarker.setMap(null);
       posMarker = createPosMarker(map, place);
 
       // set map bounds to new location
       var bounds = new window.google.maps.LatLngBounds();
 
+      // set bounds object based on place geometry
       if (place.geometry.viewport) {
         // Only geocodes have viewport.
         bounds.union(place.geometry.viewport);
       } else {
         bounds.extend(place.geometry.location);
       }
-
+      
+      // set map bounds to updated bounds obj
       map.fitBounds(bounds);
     }
   );
