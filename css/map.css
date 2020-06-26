@@ -102,8 +102,8 @@ html, body {
     display: none;
     margin-top: -60px;
     box-sizing: border-box;
+    z-index: 2;
     border-right: 1px solid #333;
-
 }
 
 #location-details button{

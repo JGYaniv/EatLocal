@@ -2,10 +2,8 @@ import mapStyle from './map/map_style.js'
 import { animateMapZoomTo } from "./utils/map_utils";
 import { createPosMarker } from "./map/map_marker";
 import { renderMarkers } from './map/map_markers';
-// import { createInfoWindow } from './map/map_info_window';
-// import addDetail from "./web_components/map_result_item"
-// import addResultsNav from "./web_components/map_results_nav"
-import * as apiUtil from "./utils/api_utils"
+import { getPageLocations } from './locations'
+import { addResultsNav } from "./web_components/map_results_nav";
 
 export const initMap = () => {
   // set marker state
@@ -13,12 +11,12 @@ export const initMap = () => {
   window.posMarker = null;
 
   // set nav state
-  let initNavState = {
+  const initNavState = {
     pageNum: 1,
     pageSize: 10,
     resultNum: 0,
   };
-  window.localStorage.setItem("navState", JSON.stringify(initNavState));
+  window.navState = initNavState;
 
   // config google map API
   var input = document.getElementById("pac-input");
@@ -47,23 +45,10 @@ export const initMap = () => {
   window.map.addListener("bounds_changed", () => {
     let bounds = window.map.getBounds(); // get current map bounds
     searchBox.setBounds(bounds); // update searchBox bias
-
-    // calculates number of results & the index of locations array to slice
-    let {pageNum, pageSize} = JSON.parse(
-      window.localStorage.getItem("navState"));
-    let endIdx = pageNum * pageSize;
-    let startIdx = (pageNum - 1) * pageSize;
-
-    // get locations and convert into a pojo based on page size and number
-    let locations = apiUtil.getNearbyLocations(bounds);
-    window.localStorage.setItem("resultNum", locations.length);
-    let pageLocations = {};
-
-    for (let i = startIdx; i < endIdx; i++ ) {
-      pageLocations[locations[i].FMID] = locations[i];
-    }
-
+    let pageLocations = getPageLocations(bounds);
     renderMarkers(pageLocations);
+    window.navState.pageNum = 1;
+    addResultsNav();
   });
 
   // Listen for the event fired when the user selects a prediction and retrieve

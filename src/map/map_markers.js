@@ -1,15 +1,11 @@
 import { createMarker, removeMarker } from "./map_marker";
 import { createInfoWindow } from "./map_info_window";
 import addDetail from "../web_components/map_result_item";
-import addResultsNav from "../web_components/map_results_nav";
-import * as apiUtil from "../utils/api_utils";
+import { addResultsNav } from "../web_components/map_results_nav";
 
 export const renderMarkers = (pageLocations) => {
-    let bounds = window.map.getBounds(); // get current map bounds
-    let { pageNum, pageSize } = JSON.parse(
-        window.localStorage.getItem("navState")
-    );
-    
+    let { pageSize } = window.navState;
+
     // remove markers that are not included in the location list
     let markersArr = Object.values(window.markers)
     for (let i = 0; i < pageSize; i++) {
@@ -23,17 +19,19 @@ export const renderMarkers = (pageLocations) => {
     let pageLocationsArr = Object.values(pageLocations)
     for (let i=0; i<pageSize; i++){
       let newLocation = pageLocationsArr[i]
-      let locationId = newLocation["FMID"];
-
-      if (!window.markers[locationId]) {
-        let infoWindow = createInfoWindow(newLocation)
-        let newMarker = createMarker(window.map, newLocation, infoWindow);
-        addDetail(newLocation, newMarker, infoWindow);
-        addResultsNav();
-        window.markers[newMarker.id] = newMarker;
+      if (!!newLocation){
+          let locationId = newLocation["FMID"];
+    
+          if (!window.markers[locationId]) {
+            let infoWindow = createInfoWindow(newLocation)
+            let newMarker = createMarker(window.map, newLocation, infoWindow);
+            addDetail(newLocation, newMarker, infoWindow);
+            window.markers[newMarker.id] = newMarker;
+          }
       }
     }
 
+    addResultsNav()
     // for testing: console logs in case markers and details are not deleting properly
     if (markers.length > pageSize) console.log('you got too many markers hombre, whatsup?')
     if (document.getElementsByClassName("map-detail-item").length > pageSize){
