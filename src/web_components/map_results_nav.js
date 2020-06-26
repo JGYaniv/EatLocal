@@ -2,9 +2,6 @@ import {renderMarkers} from "../map/map_markers"
 import {getPageLocations} from "../locations"
 
 export const addResultsNav = () => {
-  // reset page num upon render
-  // window.navState.pageNum = 1;
-
   let { pageNum, pageSize, resultNum } = window.navState;
 
   // text content for nav bar
