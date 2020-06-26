@@ -1,86 +1,59 @@
 import generateDetailView from "./web_components/map_detailed_view";
-import addDetail from "./web_components/map_result_item";
-import * as apiUtil from "./utils/api_utils";
 import {marketIcon, posIcon} from "./map_icons";
 
-//fetches locations, removes old markers and adds new ones
-export const updateMarkers = (map, markers) => {
-  if (!window.google) return null; //guard for invocation before google maps has bootstrapped
-
-  let bounds = map.getBounds();
-  let locations = bounds ? apiUtil.getNearbyLocations(bounds) : [];
-
-  markers.forEach((marker, markIdx) => {
-    if (locations.length === 0) markers=[];
-    if (!locations.some((location) => location.FMID === marker.id)) {
-      let el = document.getElementById(marker.id);
-      if (Boolean(el)) {
-        el.remove();
-      }
-      marker.setMap(null);
-      markers.splice(markIdx, 1);
-    }
+// creates marker, adds to map, attaches listeners, returns object
+export const createMarker = (map, location, infoWindow) => {
+  let marker = new window.google.maps.Marker({
+    icon: marketIcon(),
+    map: map,
+    title: location.MarketName, // need to update once DB entries are standardized
+    id: location.FMID,
+    position: {
+      lat: parseFloat(location.y),
+      lng: parseFloat(location.x),
+    },
   });
 
-  let len = locations.length;
-  if (len > 10) {
-    len = 10;
-    var page = 0;
-  }
+  // add event listeners
+  let callbacks = createMarkerCallbacks(infoWindow, marker, location);
+  marker.addListener("mouseover", callbacks.mouseover);
+  marker.addListener("mouseout", callbacks.mouseout);
+  marker.addListener("click", callbacks.click);
 
-  for (let i = 0; i < len; i++) {
-    const location = locations[i];
-
-    if (!markers.some((marker) => marker.title === location.MarketName)) {
-      let marker = new window.google.maps.Marker({
-        map: map,
-        icon: marketIcon(),
-        title: location.MarketName, // need to update once DB entries are standardized
-        // label: location.MarketName,
-        id: location.FMID,
-        position: {
-          lat: parseFloat(location.y),
-          lng: parseFloat(location.x),
-        },
-      });
-
-      var contentString = `<div class="label"><h2>${location.MarketName}</h2></div>`;
-
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString,
-      });
-
-      marker.addListener("mouseover", () => {
-        infowindow.open(map, marker);
-        document.getElementById(marker.id).style.backgroundColor = "lightblue";
-      });
-
-      marker.addListener("mouseout", () => {
-        infowindow.close(map, marker);
-        document.getElementById(marker.id).style.backgroundColor = "";
-      });
-
-      marker.addListener("click", () => {
-        generateDetailView(location);
-      });
-
-      markers.push(marker);
-      addDetail(location, marker, infowindow);
-    }
-  }
+  return marker;
 };
 
 
-export const updatePosMarker = (map, place, posMarker) => {
-    // if (!window.google) return;
+// create marker callbacks pojo
+export const createMarkerCallbacks = (infowindow, marker, location) => ({
+  mouseover: () => {
+    infowindow.open(map, marker);
+    let el = document.getElementById(location.FMID)
+    if (el) el.style.backgroundColor = "lightblue";
+  },
+  mouseout: () => {
+    infowindow.close(map, marker);
+    let el = document.getElementById(location.FMID)
+    if (el) el.style.backgroundColor = "";
+  },
+  click: () => {
+    generateDetailView(location);
+  }
+})
 
-    //remove previous pos marker if it exists
-    if (posMarker) {
-        console.log(posMarker)
-        posMarker.setMap(null)
-    } else {console.log(posMarker)}
 
-    // Create a marker for selected location.
+// creates and returns infowindow object
+export const createInfoWindow = (location) => {
+  var contentString = `<div class="label"><h2>${location.MarketName}</h2></div>`;
+  return new google.maps.InfoWindow({
+    content: contentString,
+  });
+}
+
+
+
+// Create a marker for selected location.
+export const createPosMarker = (map, place) => {
     return new window.google.maps.Marker({
         map: map,
         icon: posIcon(),

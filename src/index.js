@@ -9,7 +9,6 @@ if (!window.google) {
   script.async = true;
 
   document.head.appendChild(script);
-  console.log("head appended")
 }
 
 document.addEventListener("DOMContentLoaded", ()=>{
