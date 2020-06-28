@@ -1,3 +1,6 @@
 node_modules
 config/keys.js
 .DS_Store
+prisma/.env
+assets/data
+assets/__local-data
