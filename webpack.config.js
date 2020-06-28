@@ -4,7 +4,7 @@ module.exports = {
     mode: "development",
     entry: "./frontend/index.js",
     output: {
-        path: path.resolve(__dirname, ""),
+        path: path.resolve(__dirname, "frontend"),
         filename: "bundle.js",
     },
     module: {

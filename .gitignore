@@ -2,5 +2,7 @@ node_modules
 config/keys.js
 .DS_Store
 prisma/.env
+.env
 assets/data
 assets/__local-data
+api/models/.env
