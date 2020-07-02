@@ -1,5 +1,11 @@
 import generateDetailView from "../web_components/map_detailed_view";
-import {marketIcon, posIcon} from "./map_icons";
+import {
+  marketIcon,
+  farmstandIcon,
+  foodhubIcon,
+  csaIcon,
+  posIcon
+} from "./map_icons";
 
 // remove marker helper function
 export const removeMarker = (marker) => {
@@ -10,11 +16,20 @@ export const removeMarker = (marker) => {
 
 // creates marker, adds to map, attaches listeners, returns object
 export const createMarker = (map, location, infoWindow) => {
+  let icon;
+  switch (location.type){
+    case 'CSA': icon = csaIcon();break;
+    case 'foodhub': icon = foodhubIcon();break;
+    case 'farmstand': icon = farmstandIcon();break;
+    case 'market': icon = marketIcon();break;
+    default: icon = marketIcon();break;
+  }
+
   let marker = new window.google.maps.Marker({
-    icon: marketIcon(),
+    icon: icon,
     map: map,
     title: location.MarketName, // need to update once DB entries are standardized
-    id: location.FMID,
+    id: location.id,
     position: {
       lat: parseFloat(location.y),
       lng: parseFloat(location.x),
@@ -34,12 +49,12 @@ export const createMarker = (map, location, infoWindow) => {
 export const createMarkerCallbacks = (infowindow, marker, location) => ({
   mouseover: () => {
     infowindow.open(map, marker);
-    let el = document.getElementById(location.FMID)
+    let el = document.getElementById(location.id)
     if (el) el.style.backgroundColor = "lightblue";
   },
   mouseout: () => {
     infowindow.close(map, marker);
-    let el = document.getElementById(location.FMID)
+    let el = document.getElementById(location.id)
     if (el) el.style.backgroundColor = "";
   },
   click: () => {

@@ -12,7 +12,7 @@ export const getPageLocations = (bounds) => {
     let pageLocations = {};
 
     for (let i = startIdx; i < endIdx; i++ ) {
-      if(locations[i]) pageLocations[locations[i].FMID] = locations[i];
+      if(locations[i]) pageLocations[locations[i].id] = locations[i];
     }
 
     return pageLocations

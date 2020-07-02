@@ -20,7 +20,7 @@ export const renderMarkers = (pageLocations) => {
     for (let i=0; i<pageSize; i++){
       let newLocation = pageLocationsArr[i]
       if (!!newLocation){
-          let locationId = newLocation["FMID"];
+          let locationId = newLocation["id"];
     
           if (!window.markers[locationId]) {
             let infoWindow = createInfoWindow(newLocation)
