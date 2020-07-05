@@ -16,7 +16,7 @@ export default (location) => {
   const header = document.createElement("div");
   header.setAttribute("class", "details-header");
   const headerText = document.createElement("h1");
-  headerText.textContent = location.MarketName;
+  headerText.textContent = location.title;
   header.appendChild(headerText);
 
   const details = document.createElement("div");
@@ -27,23 +27,28 @@ export default (location) => {
   const addressIcon = document.createElement("img");
   addressIcon.src = "assets/images/location.svg";
   const addressText = document.createElement("p");
-  addressText.textContent = [
-    location.street,
-    location.city,
-    location.State,
-    location.zip,
-  ].join(", ");
+  let addressArr = []
+  if (location.street) addressArr.push(location.street)
+  if (location.city) addressArr.push(location.city)
+  if (location.state) addressArr.push(location.state)
+  if (location.zip && location.zip.length === 5) addressArr.push(location.zip)
+  addressText.textContent = addressArr.join(", ");
   address.appendChild(addressIcon);
   address.appendChild(addressText);
 
   let dates;
+  
+  dates = document.createElement("div");
+  dates.setAttribute("class", "dates");
+  const datesIcon = document.createElement("img");
+  datesIcon.src = "assets/images/calendar.svg";
+  const datesText = document.createElement("p");
   if (location.Season1Date) {
-    dates = document.createElement("div");
-    dates.setAttribute("class", "dates");
-    const datesIcon = document.createElement("img");
-    datesIcon.src = "assets/images/calendar.svg";
-    const datesText = document.createElement("p");
     datesText.textContent = location.Season1Date;
+    dates.appendChild(datesIcon);
+    dates.appendChild(datesText);
+  } else if (location.Available_Months){
+    datesText.textContent = location.Available_Months;
     dates.appendChild(datesIcon);
     dates.appendChild(datesText);
   }

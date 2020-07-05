@@ -18,7 +18,7 @@ export const removeMarker = (marker) => {
 export const createMarker = (map, location, infoWindow) => {
   let icon;
   switch (location.type){
-    case 'CSA': icon = csaIcon();break;
+    case 'csa': icon = csaIcon();break;
     case 'foodhub': icon = foodhubIcon();break;
     case 'farmstand': icon = farmstandIcon();break;
     case 'market': icon = marketIcon();break;
@@ -28,7 +28,7 @@ export const createMarker = (map, location, infoWindow) => {
   let marker = new window.google.maps.Marker({
     icon: icon,
     map: map,
-    title: location.MarketName, // need to update once DB entries are standardized
+    title: location.title, // need to update once DB entries are standardized
     id: location.id,
     position: {
       lat: parseFloat(location.y),
