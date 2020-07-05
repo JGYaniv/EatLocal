@@ -54,18 +54,18 @@ export const addResultsNav = () => {
   let right = document.createElement("img");
   right.style.height = "32px";
   right.style.width = "32px";
-  if (pageSize > resultNum) {
+  if (pageNum * pageSize >= resultNum) {
     right.src = "assets/images/arrow--right-gray.svg";
   } else {
     right.src = "assets/images/arrow--right.svg";
   }
 
   right.addEventListener("click", () => {
-    let { pageNum, pageSize, resultNum } = window.navState;
-    if ((pageNum + 1) * pageSize > resultNum) {
+    var { pageNum, pageSize, resultNum } = window.navState;
+    if ((pageNum) * pageSize >= resultNum) {
       right.src = "assets/images/arrow--right-gray.svg";
       return;
-    } else if ((pageNum + 2) * pageSize > resultNum) {
+    } else if ((pageNum + 1) * pageSize >= resultNum) {
       pageNum++;
       right.src = "assets/images/arrow--right-gray.svg";
     } else {
