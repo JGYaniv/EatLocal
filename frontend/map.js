@@ -4,6 +4,9 @@ import { createPosMarker } from "./map/map_marker";
 import { renderMarkers } from './map/map_markers';
 import { getPageLocations } from './locations'
 import { addResultsNav } from "./web_components/map_results_nav";
+import {addRefreshButton, removeRefreshButton} from "./web_components/map_refresh_button"
+import addMapKey from './map/map_key'
+import addSearchbarIcons from './web_components/hamburger_menu'
 
 export const initMap = () => {
   // set marker state
@@ -17,12 +20,15 @@ export const initMap = () => {
     resultNum: 0,
   };
   window.navState = initNavState;
+  addResultsNav();
+
+  addSearchbarIcons();
 
   // config google map API
   var input = document.getElementById("pac-input");
   const searchBox = new window.google.maps.places.SearchBox(input);
   window.map = new window.google.maps.Map(document.getElementById("map"), {
-    center: new window.google.maps.LatLng(39, -101),
+    center: new window.google.maps.LatLng(40.39, -96.91),
     zoom: 5,
     mapTypeId: "roadmap",
     styles: mapStyle,
@@ -37,15 +43,15 @@ export const initMap = () => {
         lng: position.coords.longitude,
       };
       window.map.panTo(pos);
-      animateMapZoomTo(map, 10);
+      animateMapZoomTo(window.map, 10);
     });
   }
 
-  // event listener that triggers functions which populate map
-  window.map.addListener("bounds_changed", () => {
+  // callback for searching map based on bounds
+  const searchBounds = () => {
     let bounds = window.map.getBounds(); // get current map bounds
     searchBox.setBounds(bounds); // update searchBox bias
-    
+
     // get a pages worth of locations and render them as markers
     let pageLocations = getPageLocations(bounds);
     renderMarkers(pageLocations);
@@ -53,7 +59,26 @@ export const initMap = () => {
     // reset the page numbers and re-render the nav bar
     window.navState.pageNum = 1;
     addResultsNav();
+    removeRefreshButton();
+  }
+  
+  addMapKey(searchBounds);
+
+  var fresh = 0;
+  // event listener that triggers functions which populate map
+  window.map.addListener("bounds_changed", () => {
+    if (fresh > 0) addRefreshButton(searchBounds)
+    fresh++
   });
+  
+  // event listener for when the map loads all tiles ONLY the first time! (keep for reference)
+  // window.google.maps.event.addListenerOnce(window.map, "tilesloaded", () => {
+  //   searchBounds();
+  // })
+
+  window.map.addListener("zoom_changed", () => {
+    setTimeout(searchBounds,100);
+  })
 
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
@@ -64,7 +89,9 @@ export const initMap = () => {
     if (!place.geometry) return;
 
     // set searchbox text to autocomplete value
-    document.getElementById("pac-input").value = place.formatted_address;
+    let pacInput = document.getElementById("pac-input");
+    pacInput.value = place.formatted_address;
+    pacInput.setAttribute("placeholder","enter your location")
 
     // create new posMarker and update our posMarker "state"
     if (window.posMarker) window.posMarker.setMap(null);

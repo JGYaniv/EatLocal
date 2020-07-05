@@ -1,6 +1,6 @@
 #map {
   height: 100%;
-  border-left: 1px solid black;
+  border-left: 1px solid lightgray;
 }
 
 html, body {
@@ -44,12 +44,16 @@ html, body {
   font-size: 15px;
   font-weight: 300;
   text-overflow: ellipsis;
-  width: 380px;
+  width: 370px;
   box-sizing: border-box;
-  height: 35px;
+  height: 45px;
   z-index: 1;
-  margin:10px;
+  margin: 10px;
   position: absolute;
+  border: 1px solid gray;
+  padding-left: 45px;
+  padding-right: 45px;
+  border-radius: 5px;
 }
 
 #pac-input:focus {
@@ -62,7 +66,7 @@ html, body {
     width: 400px;
     overflow: hidden;
     float: left;
-    background-color: rgb(246, 246, 246);
+    /* background-color: rgb(249, 255, 250); */
     margin-top: 60px;
     margin-bottom: 120px;
     overflow-y: auto;
@@ -86,7 +90,7 @@ html, body {
 }
 
 #pac-nav{
-  border-top: 1px lightgray solid;
+  border-top: 1px solid lightgray;
   height: 120px;
   position: absolute;
   bottom: 0;
@@ -102,7 +106,7 @@ html, body {
     display: none;
     margin-top: -60px;
     box-sizing: border-box;
-    z-index: 2;
+    z-index: 10;
     border-right: 1px solid #333;
 }
 
@@ -112,7 +116,7 @@ html, body {
   right: 20px;
   top: 340px;
   background-color: #ffffff87;
-  border: 1px solid gray;
+  border: 1px solid lightgray;
   border-radius: 30%;
   height: 40px;
   width: 40px;
@@ -159,4 +163,80 @@ html, body {
 
 div.pac-container.pac-logo.hdpi::after{
   display: none;
+}
+
+.refresh-button{
+  position: absolute;
+  margin: 0 auto;
+  top: 5px;
+  right: 0;
+  left: 0;
+}
+
+.map-key{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: white;
+  width: 200px;
+  padding: 10px;
+  border-left: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+}
+
+.map-key div{
+  display: flex;
+  height: 50px;
+  box-sizing: border-box;
+}
+
+.map-key img{
+  width: 25px;
+  margin-right: 10px;
+}
+
+.map-key input{
+  margin-top: 17px;
+  margin-right: 15px;
+  display: inline-block;
+}
+
+.hamburger{
+  position: absolute;
+  z-index: 15;
+  top: 18px;
+  left: 20px;
+  width: 30px;
+  padding: 5px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.search-icon{
+  position: absolute;
+  z-index: 5;
+  top: 20px;
+  left: 340px;
+  width: 30px;
+  padding: 5px;
+  box-sizing: border-box;
+  border-left: 1px solid lightgray;
+  padding-left: 10px;
+}
+
+.hamburger:hover{
+  background-color: #ebebeb;
+  border-radius: 38%;
+}
+
+.logo{
+  position: absolute;
+  z-index: 5;
+  top: 15px;
+  right: 15px;
+  width: 150px;
+}
+
+img[src='https://maps.gstatic.com/mapfiles/api-3/images/google_white5_hdpi.png']{
+  display:none;
 }

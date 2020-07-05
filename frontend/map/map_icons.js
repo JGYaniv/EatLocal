@@ -34,7 +34,7 @@ export const farmstandIcon = () =>
 export const foodhubIcon = () =>
   window.google
     ? {
-        url: "assets/images/market-pin.svg",
+      url: "assets/images/foodhub-pin.svg",
         size: new window.google.maps.Size(71, 71),
         origin: new window.google.maps.Point(0, 0),
         anchor: new window.google.maps.Point(17, 34),

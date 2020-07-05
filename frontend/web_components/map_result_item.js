@@ -16,7 +16,7 @@ export default (location, marker, infowindow) => {
     let timeArr = location.Season1Time.split(";").filter(el => el.length > 2);
     if (timeArr.length > 2) {
       timeArr.splice(2)
-      timeArr.push("...")
+      timeArr.push("View more...")
     }
     timeArr.slice(0,3).forEach(time => {
       let timeEl = document.createElement("p");
