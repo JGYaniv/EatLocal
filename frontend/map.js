@@ -5,7 +5,7 @@ import { renderMarkers } from './map/map_markers';
 import { getPageLocations } from './locations'
 import { addResultsNav } from "./web_components/map_results_nav";
 import {addRefreshButton, removeRefreshButton} from "./web_components/map_refresh_button"
-import addMapKey from './map/map_key'
+// import addMapKey from './map/map_key'
 import addSearchbarIcons from './web_components/hamburger_menu'
 
 export const initMap = () => {
