@@ -5,9 +5,11 @@ export default (queryString) => {
     console.log('query assembling...')
 
     let url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?' +
-        'query=' + queryString +
-        'key=' + keys.GOOGLE_API_KEY +
+        'query=' + queryString + "&" +
+        'key=' + "AIzaSyAZNRumUBPe3zF3B9zrAm8hsEqOTNEtoWs" + "&" +
         'fields=' + "photo"
+
+    // let url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=casadega+fl&key=AIzaSyAZNRumUBPe3zF3B9zrAm8hsEqOTNEtoWs&fields=photos"
     
     console.log(url)
 
@@ -16,9 +18,9 @@ export default (queryString) => {
     })
     .then(res => {
         let url = 'https://maps.googleapis.com/maps/api/place/photo?' +
-            'photo_reference=' + res.photos[0]["photo_reference"] +
-            'key=' + keys.GOOGLE_API_KEY +
-            'maxwidth=1920' +
+            'photo_reference=' + res.photos[0]["photo_reference"] + "&" +
+            'key=' + "AIzaSyAZNRumUBPe3zF3B9zrAm8hsEqOTNEtoWs" + "&" +
+            'maxwidth=1920' + "&" +
             'maxheight=1080'
             
         console.log(url)

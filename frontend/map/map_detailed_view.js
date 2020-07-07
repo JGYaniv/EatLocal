@@ -1,7 +1,7 @@
 import getPlacePicture from '../utils/maps_api_utils'
 
 export default (location) => {
-  let queryString = [location.city.trim().split().join("+"), location.state].join(",")
+  let queryString = [location.city.trim().split().join("+"), location.state].join("+")
   
   console.log("fetching details")
   console.log(queryString)
@@ -29,7 +29,11 @@ const addDetailedView = location => {
 
   const banner = document.createElement("div");
   banner.setAttribute("class", "details-banner");
-  banner.style.backgroundImage = "url('assets/images/image-placeholder.png')";
+  if (window.locationPhoto){
+    banner.style.backgroundImage = window.locationPhoto;
+  } else {
+    banner.style.backgroundImage = "url('assets/images/image-placeholder.png')";
+  }
   banner.style.backgroundPosition = "center";
   banner.style.height = "400px";
   banner.style.width = "100%";
