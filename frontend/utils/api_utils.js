@@ -4,16 +4,11 @@ const foodhubData = require('../../assets/data/usda_foodhubs.json');
 const csaData = require('../../assets/data/usda_csas.json');
 
 export const getNearbyLocations = (bounds) => {
-  let marketDataValues = Object.values(marketData)
-  let farmstandDataValues = Object.values(farmstandData)
-  let foodhubDataValues = Object.values(foodhubData)
-  let csaDataValues = Object.values(csaData)
-
   let filteredData = Object.values({ 
-    ...marketDataValues, 
-    ...farmstandDataValues, 
-    ...foodhubDataValues, 
-    ...csaDataValues
+    ...marketData, 
+    ...farmstandData, 
+    ...foodhubData, 
+    ...csaData
   }).filter((market) => {
     return (
       bounds["Za"]["j"] > market.y &&

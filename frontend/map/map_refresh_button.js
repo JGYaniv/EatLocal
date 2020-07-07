@@ -25,6 +25,10 @@ export const removeRefreshButton = () => {
     for(let i=0; i<buttons.length; i++){
         buttons[i].remove();
     }
+    let details = document.getElementById("location-details")
+    details.style.display = "none";
+    let button = document.getElementsByClassName("close-detailed-view")[0]
+    if (button) button.remove();
 }
 
 window.removeRefreshButton = removeRefreshButton;

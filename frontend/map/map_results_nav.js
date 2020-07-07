@@ -12,7 +12,7 @@ export const addResultsNav = () => {
 
   let resultMin = resultNum > 0 ? (pageNum - 1) * pageSize + 1 : 0;
   let resultMax = resultNum < pageNum * pageSize ? resultNum : pageNum * pageSize;
-  text.textContent = `showing results ${resultMin}-${resultMax}`;
+  text.textContent = `showing results ${resultMin} - ${resultMax}`;
   details.appendChild(text);
 
   // arrows for nav bar
