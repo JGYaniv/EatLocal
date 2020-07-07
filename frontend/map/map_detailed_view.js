@@ -1,14 +1,18 @@
 import getPlacePicture from '../utils/maps_api_utils'
 
 export default (location) => {
+  let queryString = [location.city.trim().split().join("+"), location.state].join(",")
+  
   console.log("fetching details")
-  let queryString = location.city + location.state
+  console.log(queryString)
+
   getPlacePicture(queryString)
   .then(res => {
     window.locationPhoto = res;
     addDetailedView(location)
   })
   .catch(err => {
+    console.log('caught in detailed view:')
     console.log(err)
     addDetailedView(location)
   })
