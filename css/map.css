@@ -103,9 +103,9 @@ html, body {
     position: absolute;
     background: rgb(246, 246, 246);
     width: 400px;
-    height: calc(100% - 1px);
+    height: calc(100%);
     display: none;
-    margin-top: -60px;
+    margin-top: -81px;
     box-sizing: border-box;
     z-index: 10;
     border-right: 1px solid #333;
@@ -114,8 +114,8 @@ html, body {
 #location-details button{
   position: absolute;
   z-index: 1;
-  right: 20px;
-  top: 340px;
+  right: 10px;
+  top: 10px;
   background-color: #ffffff87;
   border: 1px solid lightgray;
   border-radius: 30%;
@@ -240,4 +240,19 @@ div.pac-container.pac-logo.hdpi::after{
 
 img[src='https://maps.gstatic.com/mapfiles/api-3/images/google_white5_hdpi.png']{
   display:none;
+}
+
+.details-list .times {
+  display: flex;
+  align-items: flex-start;
+  flex-flow: column;
+}
+
+.detailed-times {
+  display: flex;
+}
+
+.detailed-times div {
+  margin: auto 0;
+  display: block;
 }

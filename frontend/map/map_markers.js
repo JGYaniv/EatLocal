@@ -1,7 +1,7 @@
 import { createMarker, removeMarker } from "./map_marker";
 import { createInfoWindow } from "./map_info_window";
-import addDetail from "../web_components/map_result_item";
-import { addResultsNav } from "../web_components/map_results_nav";
+import addDetail from "./map_result_item";
+import { addResultsNav } from "./map_results_nav";
 
 export const renderMarkers = (pageLocations) => {
     let { pageSize } = window.navState;
@@ -32,9 +32,4 @@ export const renderMarkers = (pageLocations) => {
     }
 
     addResultsNav()
-    // for testing: console logs in case markers and details are not deleting properly
-    if (markers.length > pageSize) console.log('you got too many markers hombre, whatsup?')
-    if (document.getElementsByClassName("map-detail-item").length > pageSize){
-      console.log('you got too details chico, whatsup?')
-    }
   }

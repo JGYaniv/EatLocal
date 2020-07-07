@@ -3,10 +3,10 @@ import { animateMapZoomTo } from "./utils/map_utils";
 import { createPosMarker } from "./map/map_marker";
 import { renderMarkers } from './map/map_markers';
 import { getPageLocations } from './locations'
-import { addResultsNav } from "./web_components/map_results_nav";
-import {addRefreshButton, removeRefreshButton} from "./web_components/map_refresh_button"
-// import addMapKey from './map/map_key'
-import addSearchbarIcons from './web_components/hamburger_menu'
+import { addResultsNav } from "./map/map_results_nav";
+import {addRefreshButton, removeRefreshButton} from "./map/map_refresh_button"
+import addMapKey from './map/map_key'
+import addSearchbarIcons from './map/hamburger_menu'
 
 export const initMap = () => {
   // set marker state
@@ -87,6 +87,7 @@ export const initMap = () => {
     var place = searchBox.getPlaces()[0];
     if (!place) return;
     if (!place.geometry) return;
+    window.place = place;
 
     // set searchbox text to autocomplete value
     let pacInput = document.getElementById("pac-input");
