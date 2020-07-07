@@ -8,7 +8,8 @@ export default (location) => {
 
   getPlacePicture(queryString)
   .then(res => {
-    window.locationPhoto = res;
+    const locationPhotoUrl = res;
+    window.locationPhotoUrl = locationPhotoUrl;
     addDetailedView(location)
   })
   .catch(err => {
@@ -18,8 +19,7 @@ export default (location) => {
   })
 }
 
-const addDetailedView = location => {
-// export default location => {
+const addDetailedView = (location) => {
   const backButton = document.createElement("button");
   backButton.innerText = "X";
   backButton.addEventListener("click", (e) => {
@@ -29,12 +29,13 @@ const addDetailedView = location => {
 
   const banner = document.createElement("div");
   banner.setAttribute("class", "details-banner");
-  if (window.locationPhoto){
-    banner.style.backgroundImage = window.locationPhoto;
+  if (window.locationPhotoUrl){
+    banner.style.backgroundImage = `url(${window.locationPhotoUrl})`;
   } else {
     banner.style.backgroundImage = "url('assets/images/image-placeholder.png')";
   }
   banner.style.backgroundPosition = "center";
+  banner.style.backgroundSize = "cover"
   banner.style.height = "400px";
   banner.style.width = "100%";
 

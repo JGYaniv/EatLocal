@@ -2,30 +2,21 @@ import axios from 'axios'
 import keys from '../../config/keys'
 
 export default (queryString) => {
-    console.log('query assembling...')
-
     let url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?' +
         'query=' + queryString + "&" +
-        'key=' + "AIzaSyAZNRumUBPe3zF3B9zrAm8hsEqOTNEtoWs" + "&" +
+        'key=' + keys.googleApiKey + "&" +
         'fields=' + "photo"
 
-    // let url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=casadega+fl&key=AIzaSyAZNRumUBPe3zF3B9zrAm8hsEqOTNEtoWs&fields=photos"
-    
-    console.log(url)
-
-    return axios.get({
-        url: url
-    })
+    return axios.get(url)
     .then(res => {
+        console.log(res)
         let url = 'https://maps.googleapis.com/maps/api/place/photo?' +
-            'photo_reference=' + res.photos[0]["photo_reference"] + "&" +
-            'key=' + "AIzaSyAZNRumUBPe3zF3B9zrAm8hsEqOTNEtoWs" + "&" +
+            'photo_reference=' + res.data.results[0].photos[0]["photo_reference"] + "&" +
+            'key=' + keys.googleApiKey + "&" +
             'maxwidth=1920' + "&" +
             'maxheight=1080'
             
-        console.log(url)
-
-        return axios.get({url: url })
+        return url
     })
     .catch(e => {console.log('caught in axios:');console.log(e)})
 }
