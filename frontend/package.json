@@ -1,0 +1,33 @@
+{
+  "name": "eatlocal",
+  "version": "1.0.0",
+  "description": "> \"About 89% percent of households do their primary grocery shopping at supermarkets or supercenters.\"",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "v12.18.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JGYaniv/EatLocal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JGYaniv/EatLocal/issues"
+  },
+  "homepage": "https://github.com/JGYaniv/EatLocal#readme"
+}

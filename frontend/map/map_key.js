@@ -1,31 +1,31 @@
 export default () => {
 
     let posIconDiv = createKeyItem(
-        "assets/images/carbon-location.svg",
+        "frontend/assets/images/carbon-location.svg",
         "Searched location",
         "pos"
     )
 
     let marketIconDiv = createKeyItem(
-        "assets/images/market-pin.svg",
+        "frontend/assets/images/market-pin.svg",
         "Farmer's Market",
         "farmersmarket"
     )
 
     let farmstandIconDiv = createKeyItem(
-        "assets/images/farmstand-pin.svg",
+        "frontend/assets/images/farmstand-pin.svg",
         "Farm Stand",
         "farmstand"
     )
 
     let foodhubIconDiv = createKeyItem(
-        "assets/images/foodhub-pin.svg",
+        "frontend/assets/images/foodhub-pin.svg",
         "Food Hub",
         "foodhub"
     )
 
     let csaIconDiv = createKeyItem(
-        "assets/images/csa-pin.svg",
+        "frontend/assets/images/csa-pin.svg",
         "CSA Dropoff",
         "csa"
     )

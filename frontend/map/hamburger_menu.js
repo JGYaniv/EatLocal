@@ -1,12 +1,12 @@
 export default () => {
     let burger = document.createElement("img")
-    burger.setAttribute("src", "assets/images/open-menu.svg")
+    burger.setAttribute("src", "frontend/assets/images/open-menu.svg")
     burger.setAttribute("class", "hamburger")
     burger.addEventListener("click", openMenu)
     // document.getElementById("body").append(burger)
 
     let search = document.createElement("img")
-    search.setAttribute("src", "assets/images/search.svg")
+    search.setAttribute("src", "frontend/assets/images/search.svg")
     search.setAttribute("class", "search-icon")
     document.getElementById("body").append(search)
 }

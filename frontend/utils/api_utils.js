@@ -1,7 +1,7 @@
-const marketData = require('../../assets/data/usda_markets.json');
-const farmstandData = require('../../assets/data/usda_farmstands.json');
-const foodhubData = require('../../assets/data/usda_foodhubs.json');
-const csaData = require('../../assets/data/usda_csas.json');
+const marketData = require('../assets/data/usda_markets.json');
+const farmstandData = require('../assets/data/usda_farmstands.json');
+const foodhubData = require('../assets/data/usda_foodhubs.json');
+const csaData = require('../assets/data/usda_csas.json');
 
 export const getNearbyLocations = (bounds) => {
   let filteredData = Object.values({ 

@@ -24,23 +24,23 @@ export const addResultsNav = () => {
   left.style.height = "32px";
   left.style.width = "32px";
   if (pageNum > 1) {
-    left.src = "assets/images/arrow--left.svg";
+    left.src = "frontend/assets/images/arrow--left.svg";
   } else {
-    left.src = "assets/images/arrow--left-gray.svg";
+    left.src = "frontend/assets/images/arrow--left-gray.svg";
   }
 
   left.addEventListener("click", () => {
     let { pageNum, pageSize, resultNum } = window.navState;
 
     if ((pageNum - 1) * pageSize <= 0) {
-      left.src = "assets/images/arrow--left-gray.svg";
+      left.src = "frontend/assets/images/arrow--left-gray.svg";
       return;
     } else if ((pageNum - 2) * pageSize <= 0) {
       pageNum--;
-      left.src = "assets/images/arrow--left-gray.svg";
+      left.src = "frontend/assets/images/arrow--left-gray.svg";
     } else {
       pageNum--;
-      left.src = "assets/images/arrow--left.svg";
+      left.src = "frontend/assets/images/arrow--left.svg";
     }
 
     let newState = { pageNum, pageSize, resultNum };
@@ -55,22 +55,22 @@ export const addResultsNav = () => {
   right.style.height = "32px";
   right.style.width = "32px";
   if (pageNum * pageSize >= resultNum) {
-    right.src = "assets/images/arrow--right-gray.svg";
+    right.src = "frontend/assets/images/arrow--right-gray.svg";
   } else {
-    right.src = "assets/images/arrow--right.svg";
+    right.src = "frontend/assets/images/arrow--right.svg";
   }
 
   right.addEventListener("click", () => {
     var { pageNum, pageSize, resultNum } = window.navState;
     if ((pageNum) * pageSize >= resultNum) {
-      right.src = "assets/images/arrow--right-gray.svg";
+      right.src = "frontend/assets/images/arrow--right-gray.svg";
       return;
     } else if ((pageNum + 1) * pageSize >= resultNum) {
       pageNum++;
-      right.src = "assets/images/arrow--right-gray.svg";
+      right.src = "frontend/assets/images/arrow--right-gray.svg";
     } else {
       pageNum++;
-      right.src = "assets/images/arrow--right.svg";
+      right.src = "frontend/assets/images/arrow--right.svg";
     }
 
     let newState = { pageNum, pageSize, resultNum };

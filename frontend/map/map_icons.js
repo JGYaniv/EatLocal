@@ -1,7 +1,7 @@
 export const posIcon = () =>
   window.google
     ? {
-        url: "assets/images/carbon-location.svg",
+        url: "frontend/assets/images/carbon-location.svg",
         size: new window.google.maps.Size(71, 71),
         origin: new window.google.maps.Point(0, 0),
         anchor: new window.google.maps.Point(17, 34),
@@ -12,7 +12,7 @@ export const posIcon = () =>
 export const marketIcon = () =>
   window.google
     ? {
-        url: "assets/images/market-pin.svg",
+        url: "frontend/assets/images/market-pin.svg",
         size: new window.google.maps.Size(71, 71),
         origin: new window.google.maps.Point(0, 0),
         anchor: new window.google.maps.Point(17, 34),
@@ -23,7 +23,7 @@ export const marketIcon = () =>
 export const farmstandIcon = () =>
   window.google
     ? {
-        url: "assets/images/farmstand-pin.svg",
+        url: "frontend/assets/images/farmstand-pin.svg",
         size: new window.google.maps.Size(71, 71),
         origin: new window.google.maps.Point(0, 0),
         anchor: new window.google.maps.Point(17, 34),
@@ -34,7 +34,7 @@ export const farmstandIcon = () =>
 export const foodhubIcon = () =>
   window.google
     ? {
-      url: "assets/images/foodhub-pin.svg",
+      url: "frontend/assets/images/foodhub-pin.svg",
         size: new window.google.maps.Size(71, 71),
         origin: new window.google.maps.Point(0, 0),
         anchor: new window.google.maps.Point(17, 34),
@@ -45,7 +45,7 @@ export const foodhubIcon = () =>
 export const csaIcon = () =>
   window.google
     ? {
-        url: "assets/images/csa-pin.svg",
+        url: "frontend/assets/images/csa-pin.svg",
         size: new window.google.maps.Size(71, 71),
         origin: new window.google.maps.Point(0, 0),
         anchor: new window.google.maps.Point(17, 34),

@@ -1,5 +1,5 @@
 import { initMap } from "./map.js";
-import keys from '../config/keys.js';
+import keys from './config/keys.js';
 
 if (!window.google) {
   let script = document.createElement("script");

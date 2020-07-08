@@ -1,8 +1,8 @@
 node_modules
-config/keys.js
-config/keysES5.js
+frontend/node_modules
+frontend/config/
 .DS_Store
-prisma/.env
 .env
-assets/__local-data
+frontend/assets/__local-data
+frontend/assets/util
 api/models/.env

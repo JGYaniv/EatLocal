@@ -4,15 +4,15 @@ export default (location) => {
   let queryString = [location.city.trim().split().join("+"), location.state].join("+")
   
   getPlacePicture(queryString)
-  .then(res => {
-    const locationPhotoUrl = res;
-    window.locationPhotoUrl = locationPhotoUrl;
+  // .then(res => {
+  //   const locationPhotoUrl = res;
+  //   window.locationPhotoUrl = locationPhotoUrl;
+  //   addDetailedView(location)
+  // })
+  // .catch(err => {
+  //   console.log(err)
     addDetailedView(location)
-  })
-  .catch(err => {
-    console.log(err)
-    addDetailedView(location)
-  })
+  // })
 }
 
 const addDetailedView = (location) => {
@@ -31,7 +31,7 @@ const addDetailedView = (location) => {
   if (window.locationPhotoUrl){
     banner.style.backgroundImage = `url(${window.locationPhotoUrl})`;
   } else {
-    banner.style.backgroundImage = "url('assets/images/image-placeholder.png')";
+    banner.style.backgroundImage = "url('frontend/assets/images/image-placeholder.png')";
   }
   banner.style.backgroundPosition = "center";
   banner.style.backgroundSize = "cover"
@@ -50,7 +50,7 @@ const addDetailedView = (location) => {
   const address = document.createElement("div");
   address.setAttribute("class", "address");
   const addressIcon = document.createElement("img");
-  addressIcon.src = "assets/images/location.svg";
+  addressIcon.src = "frontend/assets/images/location.svg";
   const addressText = document.createElement("p");
   let addressArr = []
   if (location.street) addressArr.push(location.street)
@@ -65,7 +65,7 @@ const addDetailedView = (location) => {
   const times = document.createElement("span");
   times.setAttribute("class","detailed-times")
   const timesIcon = document.createElement("img");
-  timesIcon.src = "assets/images/time.svg";
+  timesIcon.src = "frontend/assets/images/time.svg";
 
   const timesList = document.createElement("div")
 
