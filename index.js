@@ -36,12 +36,9 @@ app.get("/api/locations/:id", (req, res) => {
       });
 });
 
-// view engine setup
-app.set(path.join(__dirname, ''));
-app.set('view engine', 'jade');
-
+app.use(express.static("./"));
 app.get("/", (req, res) => {
-  res.render("index", { title: "Eat Local" });
+  res.sendFile(path.resolve(__dirname, "", "index.html"));
 });
 
 
