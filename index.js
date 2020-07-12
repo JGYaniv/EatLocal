@@ -36,8 +36,12 @@ app.get("/api/locations/:id", (req, res) => {
       });
 });
 
+// view engine setup
+app.set('views', path.join(__dirname, ''));
+app.set('view engine', 'jade');
+
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, './index.html'));
+  res.render("index", { title: "Eat Local" });
 });
 
 
