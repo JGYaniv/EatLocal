@@ -5,4 +5,10 @@ frontend/config/
 .env
 frontend/assets/__local-data
 frontend/assets/util
+assets/__local-data
+assets/data
 api/models/.env
+.env
+node_modules
+assets/util/uploaders/node_modules
+assets/util/uploaders/.env
