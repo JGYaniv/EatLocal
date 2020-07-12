@@ -1,22 +1,11 @@
-import {getPlacePicture} from '../utils/maps_api_utils'
 import {getLocationDetails} from '../utils/api_utils'
 
 export async function generateDetailView(location) {
   const locationQuery = await getLocationDetails(location.id)
-  const locationDetails = await JSON.parse(locationQuery[0].data);
-
-  let queryString = [location.city.trim().split().join("+"), location.state].join("+")
-  
-  getPlacePicture(queryString)
-  .then(res => {
-    const locationPhotoUrl = res;
-    window.locationPhotoUrl = locationPhotoUrl;
-    addDetailedView(locationDetails);
-  })
-  .catch(err => {
-    console.log(err)
-    addDetailedView(locationDetails);
-  })
+  const locationDetails = await locationQuery[0];
+  locationDetails.details = await JSON.parse(locationDetails.data);
+  console.log(locationDetails);
+  addDetailedView(locationDetails);
 }
 
 const addDetailedView = (location) => {
@@ -32,8 +21,8 @@ const addDetailedView = (location) => {
 
   const banner = document.createElement("div");
   banner.setAttribute("class", "details-banner");
-  if (window.locationPhotoUrl){
-    banner.style.backgroundImage = `url(${window.locationPhotoUrl})`;
+  if (location.photoUrl){
+    banner.style.backgroundImage = `url(${location.photoUrl})`;
   } else {
     banner.style.backgroundImage = "url('frontend/assets/images/image-placeholder.png')";
   }

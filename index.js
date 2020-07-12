@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path = require('path');
 const pgp = require("pg-promise")(/* options */);
+const getPlacePicture = require("./maps_api_utils")
 require("dotenv").config();
 
 var db;
@@ -25,7 +26,18 @@ app.get("/api/locations", (req, res) => {
 app.get("/api/locations/:id", (req, res) => {
     db.any("SELECT * FROM locations WHERE id=$1", req.params.id)
       .then(function (data) {
-        res.json(data);
+
+        let queryString = [
+          data[0].city.trim().split().join("+"),
+          data[0].state,
+        ].join("+");
+        
+        getPlacePicture(queryString)
+          .then(function (photoUrl) {
+            data[0].photoUrl = photoUrl;
+            res.json(data);
+          })
+          .catch((e) => console.log(e));
       })
       .catch(function (error) {
         console.log("ERROR:", error);

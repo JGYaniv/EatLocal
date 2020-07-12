@@ -1,23 +1,25 @@
-import axios from 'axios'
-import keys from '../config/keys'
+const axios = require('axios')
+require("dotenv").config();
 
-export const getPlacePicture = (queryString) => {
+async function getPlacePicture (queryString) {
     let url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?' +
         'query=' + queryString + "&" +
-        'key=' + keys.googleApiKey + "&" +
+        'key=' + process.env.GOOGLE_API_KEY + "&" +
         'fields=' + "photo"
 
     return axios.get(url)
     .then(res => {
-        var url;
+        var photo_url;
         if (res.data.results[0].photos){
-            url = 'https://maps.googleapis.com/maps/api/place/photo?' +
+            photo_url = 'https://maps.googleapis.com/maps/api/place/photo?' +
                 'photo_reference=' + res.data.results[0].photos[0]["photo_reference"] + "&" +
-                'key=' + keys.googleApiKey + "&" +
+                'key=' + process.env.GOOGLE_API_KEY + "&" +
                 'maxwidth=720' + "&" +
                 'maxheight=480'
         }
-        return url
+        return photo_url;
     })
     .catch(e => console.log(e))
 }
+
+module.exports = getPlacePicture;
