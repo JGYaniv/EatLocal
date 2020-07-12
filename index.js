@@ -7,9 +7,13 @@ require("dotenv").config();
 var db;
 
 if (process.env.TYPE == "dev"){
-    db = pgp("postgres://jonathanyaniv:carrots.19090@localhost:5432/eatlocal");
+  console.log("connecting to local db");
+  console.log(process.env.LOCAL_DATABASE_URL);
+  db = pgp(process.env.LOCAL_DATABASE_URL);
 } else {
-    const db = pgp(process.env.DATABASE_URL);
+  console.log("connecting to remote db");
+  console.log(process.env.DATABASE_URL)
+  db = pgp(process.env.DATABASE_URL);
 }
 
 app.get("/api/locations", (req, res) => {
@@ -33,6 +37,6 @@ app.get("/api/locations/:id", (req, res) => {
 });
 
 
-app.listen(port, () =>
-  console.log(`Listening to http://localhost:${port}`)
+app.listen(process.env.PORT || 3000, () =>
+  console.log(`Listening to ${process.env.PORT || 3000}`)
 );
