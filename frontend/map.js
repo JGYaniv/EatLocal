@@ -48,12 +48,12 @@ export const initMap = () => {
   }
 
   // callback for searching map based on bounds
-  const searchBounds = () => {
+  async function searchBounds(){
     let bounds = window.map.getBounds(); // get current map bounds
     searchBox.setBounds(bounds); // update searchBox bias
 
     // get a pages worth of locations and render them as markers
-    let pageLocations = getPageLocations(bounds);
+    let pageLocations = await getPageLocations(bounds);
     renderMarkers(pageLocations);
 
     // reset the page numbers and re-render the nav bar

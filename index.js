@@ -7,12 +7,8 @@ require("dotenv").config();
 var db;
 
 if (process.env.TYPE == "dev"){
-  console.log("connecting to local db");
-  console.log(process.env.LOCAL_DATABASE_URL);
   db = pgp(process.env.LOCAL_DATABASE_URL);
 } else {
-  console.log("connecting to remote db");
-  console.log(process.env.DATABASE_URL)
   db = pgp(process.env.DATABASE_URL);
 }
 

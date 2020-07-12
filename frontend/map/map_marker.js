@@ -1,4 +1,4 @@
-import generateDetailView from "./map_detailed_view";
+import {generateDetailView} from "./map_detailed_view";
 import {
   marketIcon,
   farmstandIcon,

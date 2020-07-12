@@ -1,17 +1,21 @@
-import getPlacePicture from '../utils/maps_api_utils'
+import {getPlacePicture} from '../utils/maps_api_utils'
+import {getLocationDetails} from '../utils/api_utils'
 
-export default (location) => {
+export async function generateDetailView(location) {
+  const locationQuery = await getLocationDetails(location.id)
+  const locationDetails = await JSON.parse(locationQuery[0].data);
+
   let queryString = [location.city.trim().split().join("+"), location.state].join("+")
   
   getPlacePicture(queryString)
   .then(res => {
     const locationPhotoUrl = res;
     window.locationPhotoUrl = locationPhotoUrl;
-    addDetailedView(location)
+    addDetailedView(locationDetails);
   })
   .catch(err => {
     console.log(err)
-    addDetailedView(location)
+    addDetailedView(locationDetails);
   })
 }
 

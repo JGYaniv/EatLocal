@@ -1,15 +1,11 @@
-const marketData = require('../assets/data/usda_markets.json');
-const farmstandData = require('../assets/data/usda_farmstands.json');
-const foodhubData = require('../assets/data/usda_foodhubs.json');
-const csaData = require('../assets/data/usda_csas.json');
+const axios = require('axios')
+const getLocations = () => axios.get("api/locations")
+const getLocation = (id) => axios.get(`api/locations/${id}`)
 
-export const getNearbyLocations = (bounds) => {
-  let filteredData = Object.values({ 
-    ...marketData, 
-    ...farmstandData, 
-    ...foodhubData, 
-    ...csaData
-  }).filter((market) => {
+export async function getNearbyLocations(bounds){
+  const locations = await getLocations()
+
+  let filteredLocations = locations.data.filter((market) => {
     return (
       bounds["Za"]["j"] > market.y &&
       bounds["Za"]["i"] < market.y &&
@@ -25,8 +21,11 @@ export const getNearbyLocations = (bounds) => {
         Math.abs(el2.x - xMid) + Math.abs(el2.y - yMid)
     ))
   });
-    
-  return filteredData;
+  
+  return filteredLocations;
 };
 
-
+export async function getLocationDetails(id){
+  const location = await getLocation(id)
+  return await location.data;
+}

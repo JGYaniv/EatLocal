@@ -1,4 +1,4 @@
-import generateDetailView from "./map_detailed_view";
+import {generateDetailView} from "./map_detailed_view";
 
 // adds detail div to sidebar
 export default (location, marker, infowindow) => {

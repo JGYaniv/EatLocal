@@ -11,10 +11,12 @@ if (!window.google) {
   document.head.appendChild(script);
 }
 
-document.addEventListener("DOMContentLoaded", ()=>{
-    if (!window.google) {
-      setTimeout(initMap, 1000);
-    } else {
-      initMap();
-    };
-})
+const ensureMapsLoaded = () => {
+  if (!window.google) {
+    setTimeout(ensureMapsLoaded, 1000);
+  } else {
+    initMap();
+  }
+};
+
+document.addEventListener("DOMContentLoaded", ensureMapsLoaded);
