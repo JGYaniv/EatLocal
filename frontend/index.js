@@ -11,24 +11,6 @@ if (!window.google) {
   document.head.appendChild(script);
 }
 
-// const ensureLoad = () => {
-//   if (!window.google) {
-//     setTimeout(() => {
-//       document.addEventListener("DOMContentLoaded", () => {
-//         if (!window.google) {
-//           ensureLoad();
-//         } else {
-//           initMap();
-//         };
-//       })
-//     }, 1000);
-//   } else {
-//     initMap();
-//   };
-// }
-
-// ensureLoad();
-
 document.addEventListener("DOMContentLoaded", ()=>{
     if (!window.google) {
       setTimeout(initMap, 1000);

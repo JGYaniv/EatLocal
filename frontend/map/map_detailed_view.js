@@ -4,15 +4,15 @@ export default (location) => {
   let queryString = [location.city.trim().split().join("+"), location.state].join("+")
   
   getPlacePicture(queryString)
-  // .then(res => {
-  //   const locationPhotoUrl = res;
-  //   window.locationPhotoUrl = locationPhotoUrl;
-  //   addDetailedView(location)
-  // })
-  // .catch(err => {
-  //   console.log(err)
+  .then(res => {
+    const locationPhotoUrl = res;
+    window.locationPhotoUrl = locationPhotoUrl;
     addDetailedView(location)
-  // })
+  })
+  .catch(err => {
+    console.log(err)
+    addDetailedView(location)
+  })
 }
 
 const addDetailedView = (location) => {
