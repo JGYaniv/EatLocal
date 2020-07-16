@@ -46,6 +46,7 @@ export const addResultsNav = () => {
     let newState = { pageNum, pageSize, resultNum };
     window.navState = newState;
     let newPageLocations = getPageLocations(window.map.getBounds());
+    window.pageLocations = newPageLocations;
     renderMarkers(newPageLocations);
     addResultsNav()
   });
