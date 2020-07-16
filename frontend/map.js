@@ -54,6 +54,7 @@ export const initMap = () => {
 
     // get a pages worth of locations and render them as markers
     let pageLocations = await getPageLocations(bounds);
+    window.pageLocations = pageLocations;
     renderMarkers(pageLocations);
 
     // reset the page numbers and re-render the nav bar
