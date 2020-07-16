@@ -1,7 +1,7 @@
 import {renderMarkers} from "./map_markers"
 import {getPageLocations} from "../locations"
 
-export const addResultsNav = () => {
+export async function addResultsNav() {
   let { pageNum, pageSize, resultNum } = window.navState;
 
   // text content for nav bar
@@ -29,7 +29,7 @@ export const addResultsNav = () => {
     left.src = "frontend/assets/images/arrow--left-gray.svg";
   }
 
-  left.addEventListener("click", () => {
+  left.addEventListener("click", async function(){
     let { pageNum, pageSize, resultNum } = window.navState;
 
     if ((pageNum - 1) * pageSize <= 0) {
@@ -45,7 +45,7 @@ export const addResultsNav = () => {
 
     let newState = { pageNum, pageSize, resultNum };
     window.navState = newState;
-    let newPageLocations = getPageLocations(window.map.getBounds());
+    let newPageLocations = await getPageLocations(window.map.getBounds());
     window.pageLocations = newPageLocations;
     renderMarkers(newPageLocations);
     addResultsNav()
@@ -61,7 +61,7 @@ export const addResultsNav = () => {
     right.src = "frontend/assets/images/arrow--right.svg";
   }
 
-  right.addEventListener("click", () => {
+  right.addEventListener("click", async function () {
     var { pageNum, pageSize, resultNum } = window.navState;
     if ((pageNum) * pageSize >= resultNum) {
       right.src = "frontend/assets/images/arrow--right-gray.svg";
@@ -76,7 +76,8 @@ export const addResultsNav = () => {
 
     let newState = { pageNum, pageSize, resultNum };
     window.navState = newState;
-    let newPageLocations = getPageLocations(window.map.getBounds());
+    let newPageLocations = await getPageLocations(window.map.getBounds());
+    window.pageLocations = newPageLocations;
     renderMarkers(newPageLocations);
     addResultsNav()
   });
