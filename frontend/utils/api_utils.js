@@ -5,12 +5,12 @@ const getLocation = (id) => axios.get(`api/locations/${id}`)
 export async function getNearbyLocations(bounds){
   const locations = await getLocations()
 
-  let filteredLocations = locations.data.filter((market) => {
+  let filteredLocations = locations.data.filter((market) => { 
     return (
-      bounds["Za"]["j"] > market.y &&
-      bounds["Za"]["i"] < market.y &&
-      bounds["Ua"]["j"] > market.x &&
-      bounds["Ua"]["i"] < market.x
+      bounds["Va"]["j"] > market.y &&
+      bounds["Va"]["i"] < market.y &&
+      bounds["Za"]["j"] > market.x &&
+      bounds["Za"]["i"] < market.x
     );
   }).sort((el1, el2) => {
     let yMid = (bounds["Za"]["j"] + bounds["Za"]["i"])/2
