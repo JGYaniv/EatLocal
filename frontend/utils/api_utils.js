@@ -4,6 +4,7 @@ const getLocation = (id) => axios.get(`api/locations/${id}`)
 
 export async function getNearbyLocations(bounds){
   console.log(bounds)
+  console.log("!!!!")
 
   const locations = await getLocations()
 
