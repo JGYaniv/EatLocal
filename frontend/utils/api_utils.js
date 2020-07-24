@@ -5,6 +5,8 @@ const getLocation = (id) => axios.get(`api/locations/${id}`)
 export async function getNearbyLocations(bounds){
   const locations = await getLocations()
 
+  console.log(bounds)
+
   let filteredLocations = locations.data.filter((market) => {
     return (
       bounds["Za"]["j"] > market.y &&
