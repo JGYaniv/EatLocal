@@ -7,7 +7,6 @@ export async function getPageLocations(bounds){
     let startIdx = (pageNum - 1) * pageSize;
 
     // get locations and convert into a pojo based on page size and number
-    console.log(bounds, "!!!!")
     let locations = await apiUtil.getNearbyLocations(bounds);
     
     window.navState.resultNum = locations.length;

@@ -50,7 +50,6 @@ export const initMap = () => {
   // callback for searching map based on bounds
   async function searchBounds(){
     let bounds = window.map.getBounds(); // get current map bounds
-    console.log(bounds, "????")
     searchBox.setBounds(bounds); // update searchBox bias
 
     // get a pages worth of locations and render them as markers
