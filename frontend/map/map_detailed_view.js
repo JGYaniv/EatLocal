@@ -1,10 +1,10 @@
 import {getLocationDetails} from '../utils/api_utils'
+import generateLinkIcons from './map_detailed_links'
 
 export async function generateDetailView(location) {
   const locationQuery = await getLocationDetails(location.id)
   const locationDetails = await locationQuery[0];
   locationDetails.details = await JSON.parse(locationDetails.data);
-  console.log(locationDetails);
   addDetailedView(locationDetails);
 }
 
@@ -107,6 +107,9 @@ const addDetailedView = (location) => {
       locationType.textContent = "Food Hub";
       break;
   }
+
+  let linkIcons = generateLinkIcons(location.details)
+  details.append(linkIcons)
 
   details.appendChild(locationType);
   details.appendChild(address);

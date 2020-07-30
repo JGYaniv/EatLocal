@@ -366,3 +366,21 @@ img[src='https://maps.gstatic.com/mapfiles/api-3/images/google_white5_hdpi.png']
   text-align: left;
   padding-left: 1rem;
 }
+
+.links {
+  height: 2rem;
+
+}
+
+.links a img{
+  height: 1.5rem;
+  opacity: 60%;
+  border: 2px solid #282828;
+  padding: 2px;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+
+.links a img:hover{
+  opacity: 100%;
+}
