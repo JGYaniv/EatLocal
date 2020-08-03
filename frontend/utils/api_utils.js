@@ -1,6 +1,6 @@
 const axios = require('axios')
-const getLocations = () => axios.get("http://localhost:3000/api/locations")
-const getLocation = (id) => axios.get(`http://localhost:3000/api/locations/${id}`)
+const getLocations = () => axios.get("api/locations")
+const getLocation = (id) => axios.get(`api/locations/${id}`)
 
 export async function getNearbyLocations(bounds){
   const locations = await getLocations()
