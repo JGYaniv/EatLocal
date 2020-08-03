@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .overlay{
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            background-position-x: center;
+            background: url('https://media2.giphy.com/media/tIHktzgRi8yjIplFVI/giphy.gif?cid=ecf05e47d8ohwyyqj1wmomhash130jh6obpqxse30tr4usa5&rid=giphy.gif');
+        }
+
+        .content {
+            background-color: rgb(190, 190, 190);
+            height: 100%;
+            position: absolute;
+            width: 100%;
+        }
+
+        a, h1, button, input {
+            color: white;
+        }
+
+        button, input{
+            background-color: darkgray;
+        }
+
+        button:hover, input:hover{
+            cursor: pointer;
+        }
+
+        .fxnav {
+            position: absolute;
+            margin: auto;
+            bottom: 25%;
+            right: 25%;
+        }
+        
+        .fxnav button {
+            padding: 10px 20px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<div class="overlay"></div>
+<body>
+    <div class="content">
+        <h1>🏴‍☠️ Thar be clickables:</h1>
+        <ul>
+            <li>🏴‍☠️ <a href="#">its a link!</a></li>
+            <li>🏴‍☠️ <a href="#">its a link!</a></li>
+            <li>🏴‍☠️ <a href="#">its a link!</a></li>
+            <li>🏴‍☠️ <a href="#">its a link!</a></li>
+            <li>🏴‍☠️ <a href="#">its a link!</a></li>
+            <li>🏴‍☠️ <button>ima button!</button></li>
+            <li>🏴‍☠️ <button>ima button!</button></li>
+            <li>🏴‍☠️ <button>ima button!</button></li>
+            <li>🏴‍☠️ <button>ima button!</button></li>
+            <li>🏴‍☠️ <button>ima button!</button></li>
+            <li>🏴‍☠️ <button>ima button!</button></li>
+            <li>🏴‍☠️ <input type="submit" value="ima input!"></input></li>
+            <li>🏴‍☠️ <input type="submit" value="ima input!"></input></li>
+            <li>🏴‍☠️ <input type="submit" value="ima input!"></input></li>
+            <li>🏴‍☠️ <input type="submit" value="ima input!"></input></li>
+            <li>🏴‍☠️ <input type="submit" value="ima input!"></input></li>
+        </ul>
+    </div>
+    <div class="fxnav">
+        <button>leaves</button>
+        <button>thunderstorm</button>
+        <button>snow</button>
+        <button>dragon</button>
+    </div>
+</body>
+<script>
+    const links = {
+        leaves: "https://media0.giphy.com/media/WGHT0Cbbihnry/giphy.gif?cid=ecf05e47dd094c2e73a540885b9280fb915fa762e37844f6&rid=giphy.gif",
+        snow: "https://media2.giphy.com/media/tIHktzgRi8yjIplFVI/giphy.gif?cid=ecf05e47d8ohwyyqj1wmomhash130jh6obpqxse30tr4usa5&rid=giphy.gif",
+        thunderstorm: "https://media1.giphy.com/media/MittlQxzZoEec/giphy.gif?cid=ecf05e4701240fcce006f4a2fe8c1a4b18e39be00390e018&rid=giphy.gif",
+        dragon: "https://media3.giphy.com/media/sFvYgmLRPrvRS/giphy.gif?cid=ecf05e47vkxi3phpec1pskvfw8sf5aucw4xef2zzi2hhdbo1&rid=giphy.gif"
+    }
+
+    let fxButtons = document.querySelectorAll(".fxnav button")
+    let overlay = document.querySelector(".overlay")
+    const toggleFx = (e) => {overlay.style.background=`url(${links[e.target.textContent]})`;overlay.style.backgroundSize="cover"};
+
+    Array.from(fxButtons).forEach(butt => butt.addEventListener("click", toggleFx))
+</script>
+</html>
